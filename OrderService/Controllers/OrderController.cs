@@ -1,27 +1,27 @@
-﻿
-using ClassificationService.Models;
-using ClassificationService.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using OrderService.Models;
+using OrderService.Repositories;
 
-namespace ClassificationService.Controllers
+namespace OrderService.Controllers
 {
     [ApiController]
-    [Route("ClassificationService/[controller]")]
-    public class SupplierController : ControllerBase
+    [Route("[controller]")]
+    public class OrderController : ControllerBase
     {
-        private readonly IRepository<SupplierEntity> _repository;
+        private readonly IRepository<OrderEntity> _repository;
 
-        public SupplierController(IRepository<SupplierEntity> repository)
+        public OrderController(IRepository<OrderEntity> repository)
         {
             _repository = repository;
         }
 
         /// <summary>
-        /// List all Suppliers
+        /// List all Categorys
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -33,7 +33,7 @@ namespace ClassificationService.Controllers
         }
 
         /// <summary>
-        /// Get Supplier
+        /// Get Category
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -52,12 +52,12 @@ namespace ClassificationService.Controllers
         }
 
         /// <summary>
-        /// Find supplier by name
+        /// Find categories by name
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpGet("GetByName/{name}")]
-        [ProducesResponseType(typeof(List<SupplierEntity>), 200)]
+        [ProducesResponseType(typeof(List<OrderEntity>), 200)]
         public async Task<IActionResult> GetByName(string name)
         {
             var result = await _repository.ListAsync(t => t.Name.ToLower() == name.ToLower());
@@ -66,57 +66,57 @@ namespace ClassificationService.Controllers
         }
 
         /// <summary>
-        /// Create supplier
+        /// Create category
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]SupplierEntity supplier)
+        public async Task<IActionResult> Create([FromBody]OrderEntity category)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            supplier.Id = Guid.NewGuid().ToString("N");
+            category.Id = Guid.NewGuid().ToString("N");
 
-            var result = await _repository.Add(supplier);
+            var result = await _repository.Add(category);
 
             if (result == false)
             {
                 return BadRequest("create failed");
             }
 
-            return Ok(supplier);
+            return Ok(category);
         }
 
         /// <summary>
-        /// Edit supplier
+        /// Edit category
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(string id, [FromBody]SupplierEntity supplier)
+        public async Task<IActionResult> Edit(string id, [FromBody]OrderEntity category)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            supplier.Id = id;
+            category.Id = id;
 
-            var result = await _repository.Update(supplier);
+            var result = await _repository.Update(category);
 
             if (result == false)
             {
                 return BadRequest("edit failed");
             }
 
-            return Ok(supplier);
+            return Ok(category);
         }
 
         /// <summary>
-        /// Delete supplier by id
+        /// Delete categories by id
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>

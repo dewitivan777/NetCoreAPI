@@ -21,7 +21,7 @@ namespace ClassificationService.Controllers
             }
 
             /// <summary>
-            /// List all Categorys
+            /// List all categories
             /// </summary>
             /// <returns></returns>
             [HttpGet]

@@ -1,27 +1,25 @@
-﻿
-using ClassificationService.Models;
-using ClassificationService.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using ProductService.Models;
+using ProductService.Repositories;
 
-namespace ClassificationService.Controllers
+namespace ProductService.Controllers
 {
     [ApiController]
-    [Route("ClassificationService/[controller]")]
-    public class SupplierController : ControllerBase
+    [Route("ProductService/[controller]")]
+    public class ProductController : ControllerBase
     {
-        private readonly IRepository<SupplierEntity> _repository;
+        private readonly IRepository<ProductEntity> _repository;
 
-        public SupplierController(IRepository<SupplierEntity> repository)
+        public ProductController(IRepository<ProductEntity> repository)
         {
             _repository = repository;
         }
 
         /// <summary>
-        /// List all Suppliers
+        /// List all Products
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -33,7 +31,7 @@ namespace ClassificationService.Controllers
         }
 
         /// <summary>
-        /// Get Supplier
+        /// Get Product
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -52,12 +50,12 @@ namespace ClassificationService.Controllers
         }
 
         /// <summary>
-        /// Find supplier by name
+        /// Find Products by name
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpGet("GetByName/{name}")]
-        [ProducesResponseType(typeof(List<SupplierEntity>), 200)]
+        [ProducesResponseType(typeof(List<ProductEntity>), 200)]
         public async Task<IActionResult> GetByName(string name)
         {
             var result = await _repository.ListAsync(t => t.Name.ToLower() == name.ToLower());
@@ -66,57 +64,57 @@ namespace ClassificationService.Controllers
         }
 
         /// <summary>
-        /// Create supplier
+        /// Create Product
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]SupplierEntity supplier)
+        public async Task<IActionResult> Create([FromBody]ProductEntity product)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            supplier.Id = Guid.NewGuid().ToString("N");
+            product.Id = Guid.NewGuid().ToString("N");
 
-            var result = await _repository.Add(supplier);
+            var result = await _repository.Add(product);
 
             if (result == false)
             {
                 return BadRequest("create failed");
             }
 
-            return Ok(supplier);
+            return Ok(product);
         }
 
         /// <summary>
-        /// Edit supplier
+        /// Edit Product
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(string id, [FromBody]SupplierEntity supplier)
+        public async Task<IActionResult> Edit(string id, [FromBody]ProductEntity product)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            supplier.Id = id;
+            product.Id = id;
 
-            var result = await _repository.Update(supplier);
+            var result = await _repository.Update(product);
 
             if (result == false)
             {
                 return BadRequest("edit failed");
             }
 
-            return Ok(supplier);
+            return Ok(product);
         }
 
         /// <summary>
-        /// Delete supplier by id
+        /// Delete Products by id
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>

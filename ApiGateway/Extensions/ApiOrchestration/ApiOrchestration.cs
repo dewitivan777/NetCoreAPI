@@ -31,7 +31,7 @@ namespace ApiGateway.API
                     .AddRoute("category", GatewayVerb.PUT,
                     new RouteInfo
                     {
-                        Path = "ClassificationService/category"
+                        Path = "ClassificationService/category/{0}"
                     })
                    //supplier
                    .AddRoute("Supplier", GatewayVerb.GET,
@@ -52,7 +52,7 @@ namespace ApiGateway.API
                     .AddRoute("Supplier", GatewayVerb.PUT,
                     new RouteInfo
                     {
-                        Path = "ClassificationService/Supplier"
+                        Path = "ClassificationService/Supplier/{0}"
                     })
                     //ProductService
                     .AddApi("ProductService", "http://localhost:5003/")

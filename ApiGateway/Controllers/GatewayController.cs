@@ -148,19 +148,20 @@ namespace ApiGateway.Controllers
         _logger.LogApiInfo(serviceName, page, parameters, request);
 
             var apiInfo = _apiOrchestrator.GetApi(serviceName);
-            var gwRouteInfo = apiInfo.Mediator.GetRoute(page.ToLower() + GatewayVerb.PUT);
+            var gwRouteInfo = apiInfo.Mediator.GetRoute(page.Split("/")[0].ToLower() + GatewayVerb.PUT);
             var routeInfo = gwRouteInfo.Route;
-
 
             _logger.LogApiInfo($"{apiInfo.BaseUrl}{routeInfo.Path}{parameters}");
 
-            var response = await _apiClient.EditAsync<object, object>(
-            baseUrl: $"{apiInfo.BaseUrl}", request, pathWithQuery: $"{routeInfo.Path}");
 
-            _logger.LogApiInfo($"{apiInfo.BaseUrl}{routeInfo.Path}{parameters}", false);
+
+            var response = await _apiClient.EditAsync<object, object>(
+            baseUrl: $"{apiInfo.BaseUrl}", request, pathWithQuery: $"{string.Format(routeInfo.Path, page.Split("/")[1] ?? "")}");
 
             if (response.IsError)
             {
+                _logger.LogApiInfo($"{apiInfo.BaseUrl}{routeInfo.Path}{parameters}", false);
+
                 if (response.ResponseError == ResponseError.Http)
                 {
                     if (string.IsNullOrWhiteSpace(response.Raw))

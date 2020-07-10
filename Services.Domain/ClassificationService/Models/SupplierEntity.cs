@@ -1,7 +1,12 @@
-﻿namespace ClassificationService.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Services.Domain.ClassificationService.Models
 {
-    public class SupplierEntity : BaseEntity
+    public class SupplierEntity
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string ContactName { get; set; }
         public string ContactTitle { get; set; }
