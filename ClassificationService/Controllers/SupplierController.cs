@@ -1,5 +1,4 @@
-﻿
-using ClassificationService.Models;
+﻿using ClassificationService.Models;
 using ClassificationService.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -40,7 +39,6 @@ namespace ClassificationService.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
-
             var result = await _repository.GetByIdAsync(id);
 
             if (result == null)
@@ -123,7 +121,6 @@ namespace ClassificationService.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-
             var result = await _repository.Delete(id);
             if (result == false)
             {

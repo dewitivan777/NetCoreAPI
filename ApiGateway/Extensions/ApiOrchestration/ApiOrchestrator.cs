@@ -6,7 +6,6 @@ namespace ApiGateway.ApiGateway
     public class ApiInfo
     {
         public string BaseUrl { get; set; }
-
         public Mediator Mediator { get; set; }
     }
 

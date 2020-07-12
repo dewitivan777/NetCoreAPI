@@ -22,16 +22,13 @@ namespace ApiGateway.ApiGateway
     public class HttpClientConfig
     {
         public Func<HttpClient> HttpClient { get; set; }
-
         public Func<HttpContent> HttpContent { get; set; }
-
         public Action<HttpClient, HttpRequest> CustomizeDefaultHttpClient { get; set; }
     }
 
     public class GatewayRouteInfo
     {
         public GatewayVerb Verb { get; set; }
-
         public RouteInfo Route { get; set; }
     }
 
@@ -39,9 +36,7 @@ namespace ApiGateway.ApiGateway
     {
         public string Path { get; set; }
         public Type ResponseType { get; set; }
-
         public Type RequestType { get; set; }
-
         public Func<ApiInfo, HttpRequest, Task<object>> Exec { get; set; }
         public HttpClientConfig HttpClientConfig { get; set; }
     }

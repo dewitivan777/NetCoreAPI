@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ClassificationService.Models
+﻿namespace Services.Domain.ProductService.Models
 {
     public class ProductEntity 
     {

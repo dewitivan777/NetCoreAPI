@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using OrderService.Models;
 using OrderService.Repositories;
 
 namespace OrderService.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("OrderService/[controller]")]
     public class OrderController : ControllerBase
     {
         private readonly IRepository<OrderEntity> _repository;
@@ -21,7 +19,7 @@ namespace OrderService.Controllers
         }
 
         /// <summary>
-        /// List all Categorys
+        /// List all orders
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -33,7 +31,7 @@ namespace OrderService.Controllers
         }
 
         /// <summary>
-        /// Get Category
+        /// Get order
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -52,67 +50,70 @@ namespace OrderService.Controllers
         }
 
         /// <summary>
-        /// Find categories by name
+        /// Find order by ProductId
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        [HttpGet("GetByName/{name}")]
+        [HttpGet("GetByProductId/{id}")]
         [ProducesResponseType(typeof(List<OrderEntity>), 200)]
-        public async Task<IActionResult> GetByName(string name)
+        public async Task<IActionResult> GetByProductId(string id)
         {
-            var result = await _repository.ListAsync(t => t.Name.ToLower() == name.ToLower());
+            var result = await _repository.ListAsync(t => t.ProductId.ToLower() == id.ToLower());
 
             return Ok(result);
         }
 
         /// <summary>
-        /// Create category
+        /// Create order
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]OrderEntity category)
+        public async Task<IActionResult> Create([FromBody]OrderEntity order)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            category.Id = Guid.NewGuid().ToString("N");
+            order.Id = Guid.NewGuid().ToString("N");
+            order.CreatedDate = DateTime.Now;
+            order.State = "Processing";
 
-            var result = await _repository.Add(category);
+            var result = await _repository.Add(order);
 
             if (result == false)
             {
                 return BadRequest("create failed");
             }
 
-            return Ok(category);
+            return Ok(order);
         }
 
         /// <summary>
-        /// Edit category
+        /// Edit order
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Edit(string id, [FromBody]OrderEntity category)
+        public async Task<IActionResult> Edit(string id, [FromBody]OrderEntity order)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            category.Id = id;
+            order.Id = id;
+            order.UpdateDate = DateTime.Now;
 
-            var result = await _repository.Update(category);
+            var result = await _repository.Update(order);
 
             if (result == false)
             {
                 return BadRequest("edit failed");
             }
 
-            return Ok(category);
+            return Ok(order);
         }
 
         /// <summary>

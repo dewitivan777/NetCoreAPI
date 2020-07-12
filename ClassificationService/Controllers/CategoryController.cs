@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using ClassificationService.Models;
 using ClassificationService.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace ClassificationService.Controllers
 {
@@ -40,7 +38,6 @@ namespace ClassificationService.Controllers
             [HttpGet("{id}")]
             public async Task<IActionResult> GetById(string id)
             {
-   
                 var result = await _repository.GetByIdAsync(id);
 
                 if (result == null)

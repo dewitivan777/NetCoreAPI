@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ProductService.Models
+﻿namespace ProductService.Models
 {
     public class ProductEntity : BaseEntity
     {
@@ -8,7 +6,7 @@ namespace ProductService.Models
         public string SupplierId { get; set; }
         public string CategoryId { get; set; }
         public int QuantityPerUnit { get; set; }
-        public double UnitPrice { get; set; }
+        public decimal UnitPrice { get; set; }
         public int UnitsInStock { get; set; }
         public int ReorderLevel { get; set; }
         public bool Discontinued { get; set; }

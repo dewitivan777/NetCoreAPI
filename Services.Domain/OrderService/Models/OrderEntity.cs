@@ -1,9 +1,10 @@
 ﻿using System;
 
-namespace OrderService.Models
+namespace Services.Domain.OrderService.Models
 {
-    public class OrderEntity : BaseEntity
+    public class OrderEntity 
     {
+        public string Id { get; set; }
         public string ProductId { get; set; }
         public decimal UnitPrice { get; set; }
         public int Quantity { get; set; }

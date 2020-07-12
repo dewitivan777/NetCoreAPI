@@ -25,7 +25,6 @@ namespace ApiGateway
         public void ConfigureServices(IServiceCollection services)
         {
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
             
             services.AddApiClient();
 

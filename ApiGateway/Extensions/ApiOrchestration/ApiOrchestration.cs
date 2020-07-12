@@ -26,7 +26,7 @@ namespace ApiGateway.API
                    .AddRoute("category", GatewayVerb.DELETE,
                     new RouteInfo
                     {
-                        Path = "ClassificationService/category"
+                        Path = "ClassificationService/category/{0}"
                     })
                     .AddRoute("category", GatewayVerb.PUT,
                     new RouteInfo
@@ -47,7 +47,7 @@ namespace ApiGateway.API
                     .AddRoute("Supplier", GatewayVerb.DELETE,
                     new RouteInfo
                     {
-                        Path = "ClassificationService/Supplier"
+                        Path = "ClassificationService/Supplier/{0}"
                     })
                     .AddRoute("Supplier", GatewayVerb.PUT,
                     new RouteInfo
@@ -62,22 +62,44 @@ namespace ApiGateway.API
                     {
                         Path = "ProductService/product"
                     })
-                    .AddRoute("Supplier", GatewayVerb.POST,
+                    .AddRoute("product", GatewayVerb.POST,
                     new RouteInfo
                     {
                         Path = "ProductService/product"
                     })
-                    .AddRoute("Supplier", GatewayVerb.DELETE,
+                    .AddRoute("product", GatewayVerb.DELETE,
                     new RouteInfo
                     {
-                        Path = "ProductService/product"
+                        Path = "ProductService/product/{0}"
                     })
-                    .AddRoute("Supplier", GatewayVerb.PUT,
+                    .AddRoute("product", GatewayVerb.PUT,
                     new RouteInfo
                     {
-                        Path = "ProductService/product"
+                        Path = "ProductService/product/{0}"
+                    })
+                    //ProductService
+                    .AddApi("OrderService", "http://localhost:5004/")
+                    //order
+                    .AddRoute("order", GatewayVerb.GET,
+                    new RouteInfo
+                    {
+                        Path = "OrderService/order"
+                    })
+                    .AddRoute("order", GatewayVerb.POST,
+                    new RouteInfo
+                    {
+                        Path = "OrderService/order"
+                    })
+                    .AddRoute("order", GatewayVerb.DELETE,
+                    new RouteInfo
+                    {
+                        Path = "OrderService/order"
+                    })
+                    .AddRoute("order", GatewayVerb.PUT,
+                    new RouteInfo
+                    {
+                        Path = "OrderService/order/{0}"
                     });
-
         }
     }
 }
