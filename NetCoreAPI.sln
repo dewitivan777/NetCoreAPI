@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Domain", "Services.Domain\Services.Domain.csproj", "{9F8C7093-EABB-4125-8847-3D63FACFCD60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderService", "OrderService\OrderService.csproj", "{7BFD7D7C-28F8-4BF3-89C4-69BADD685497}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService", "OrderService\OrderService.csproj", "{7BFD7D7C-28F8-4BF3-89C4-69BADD685497}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
