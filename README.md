@@ -8,3 +8,6 @@ Project uses a locally hosted MongoDb database (Can be changed in API services's
 - OrderEntity
 - ProductEntity
 - SupplierEntity
+
+Service can be started using the provided BAT files 
+https://github.com/dewitivan777/NetCoreAPI/tree/master/BAT%20Files
